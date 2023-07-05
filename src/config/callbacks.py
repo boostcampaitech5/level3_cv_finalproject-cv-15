@@ -13,7 +13,7 @@ from src.config import full_builds
 
 ModelCheckpointConfig = full_builds(
     ModelCheckpoint,
-    dirpath="checkpoint",
+    dirpath="checkpoint/${logger.name}",
     filename="epoch={epoch:02d}-val_loss={val_loss:.2f}",
     save_last=True,
     monitor="val_loss",

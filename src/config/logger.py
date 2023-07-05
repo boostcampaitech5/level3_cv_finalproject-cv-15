@@ -4,7 +4,7 @@ from lightning.pytorch.loggers.wandb import WandbLogger
 from src.config import full_builds
 
 WandbLoggerConfig = full_builds(
-    WandbLogger, entity="whitegreen", project="test", name="lightning-test"
+    WandbLogger, entity="hype-squad", project="FinalProject", name="lightning-test"
 )
 
 
