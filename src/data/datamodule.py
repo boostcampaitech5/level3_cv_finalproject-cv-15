@@ -1,7 +1,7 @@
 from lightning import LightningDataModule
 
 
-class XRayDataModule(LightningDataModule):
+class MNISTDataModule(LightningDataModule):
     def __init__(
         self,
         train_dataset,

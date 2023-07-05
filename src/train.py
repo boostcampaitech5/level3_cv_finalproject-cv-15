@@ -1,7 +1,7 @@
 from hydra_zen import instantiate
 from omegaconf import OmegaConf
 
-from src.data.datamodule import XRayDataModule
+from src.data.datamodule import MNISTDataModule
 from src.model import Model
 from src.utils import set_seed
 
@@ -24,7 +24,7 @@ def train(config):
         scheduler=scheduler,
     )
 
-    datamodule = XRayDataModule(
+    datamodule = MNISTDataModule(
         train_dataset=exp.train_dataset,
         train_loader=exp.train_loader,
         val_dataset=exp.val_dataset,

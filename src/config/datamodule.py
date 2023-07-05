@@ -2,7 +2,7 @@ from hydra.core.config_store import ConfigStore
 from torch.utils.data import DataLoader
 
 from src.config import partial_builds
-from src.data.dataset import MNISTDataSet
+from src.data import MNISTDataSet
 
 MNISTTrainDatasetConfig = partial_builds(
     MNISTDataSet,
