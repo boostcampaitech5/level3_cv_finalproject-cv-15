@@ -93,6 +93,13 @@ NoEalryCheckPointConfig = builds(
     ],
 )
 
+OnlyCheckPointConfig = builds(
+    list,
+    [
+        ModelCheckpointConfig,
+        LearningRateMonitorConfig,
+    ],
+)
 
 def _register_configs():
     cs = ConfigStore.instance()
@@ -103,3 +110,4 @@ def _register_configs():
     cs.store(
         group="callbacks", name="no_ealry_no_ckeckpoint", node=NoEalryCheckPointConfig
     )
+    cs.store(group="callbacks", name="only_checkpoint", node=OnlyCheckPointConfig)
