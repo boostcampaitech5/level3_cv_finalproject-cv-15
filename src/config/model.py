@@ -3,6 +3,7 @@ from timm import create_model
 
 from src.config import full_builds
 from src.models import ResNet
+from segmentation_models_pytorch import UnetPlusPlus
 
 TimmCreateModelConfig = full_builds(
     create_model, pretrained=True, num_classes="${other.num_classes}"
@@ -14,6 +15,14 @@ ResNetConfig = full_builds(
     start_channels=64,
     class_num="${other.num_classes}",
     blocks=[2, 2, 2, 2],
+)
+
+UnetHrnetConfig = full_builds(
+    UnetPlusPlus,
+    encoder_name="tu-densenet201",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=6,
 )
 
 TimmResNset50DConfig = TimmCreateModelConfig(model_name="resnest50d.in1k")
@@ -50,3 +59,9 @@ def _register_configs():
         name="timm_resnest269e",
         node=TimmResNset269EConfig,
     )
+    cs.store(
+        group="architecture",
+        name="unetplusplushrnet",
+        node=UnetHrnetConfig,
+    )
+    

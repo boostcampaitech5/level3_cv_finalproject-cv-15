@@ -28,6 +28,15 @@ BasicConfig = full_builds(
     ),
 )
 
+SkinConfig = full_builds(
+    Compose,
+    transforms=builds(
+        list,
+        [
+            ResizeConfig
+        ],
+    ),
+)
 
 def _register_configs():
     cs = ConfigStore.instance()
@@ -37,3 +46,9 @@ def _register_configs():
         name="basic",
         node=BasicConfig,
     )
+    cs.store(
+        group="transforms",
+        name="skin",
+        node=SkinConfig,
+    )
+
