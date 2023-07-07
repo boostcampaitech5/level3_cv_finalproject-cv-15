@@ -2,13 +2,13 @@ from hydra.core.config_store import ConfigStore
 from torch.utils.data import DataLoader
 
 from src.config import partial_builds
-from src.data import MNISTDataSet
+from src.data import EyesDataSet, MNISTDataSet
 
 MNISTTrainDatasetConfig = partial_builds(
     MNISTDataSet,
     root="./data",
     train=True,
-    transforms=None,
+    transform=None,
     download=True,
 )
 
@@ -16,15 +16,7 @@ MNISTValidationDatasetConfig = partial_builds(
     MNISTDataSet,
     root="./data",
     train=True,
-    transforms=None,
-    download=True,
-)
-
-MNISTTestDatasetConfig = partial_builds(
-    MNISTDataSet,
-    root="./data",
-    train=False,
-    transforms=None,
+    transform=None,
     download=True,
 )
 
@@ -47,10 +39,34 @@ MNISTValidationDataloaderConfig = partial_builds(
     pin_memory=True,
 )
 
-MNISTTestDataloaderConfig = partial_builds(
+EyesTrainDatasetConfig = partial_builds(
+    EyesDataSet,
+    path="./data/eyes/dog_ophthalmoscope_train.json",
+    root="./data/eyes/dog",
+    transform=None,
+)
+
+EyesValidationDatasetConfig = partial_builds(
+    EyesDataSet,
+    path="./data/eyes/dog_ophthalmoscope_val.json",
+    root="./data/eyes/dog",
+    transform=None,
+)
+
+EyesTrainDataloaderConfig = partial_builds(
     DataLoader,
-    batch_size=64,
-    num_workers=12,
+    batch_size=32,
+    shuffle=True,
+    num_workers=8,
+    prefetch_factor=2,
+    persistent_workers=True,
+    pin_memory=True,
+)
+
+EyesValidationDataloaderConfig = partial_builds(
+    DataLoader,
+    batch_size=32,
+    num_workers=8,
     prefetch_factor=2,
     persistent_workers=True,
     pin_memory=True,
@@ -70,11 +86,6 @@ def _register_configs():
         name="basic_val_dataset",
         node=MNISTValidationDatasetConfig,
     )
-    cs.store(
-        group="test_dataset",
-        name="basic_test_dataset",
-        node=MNISTTestDatasetConfig,
-    )
 
     cs.store(
         group="train_loader",
@@ -86,8 +97,25 @@ def _register_configs():
         name="basic_val_loader",
         node=MNISTValidationDataloaderConfig,
     )
+
     cs.store(
-        group="test_loader",
-        name="basic_test_loader",
-        node=MNISTTestDataloaderConfig,
+        group="train_dataset",
+        name="eyes_train_dataset",
+        node=EyesTrainDatasetConfig,
+    )
+    cs.store(
+        group="val_dataset",
+        name="eyes_val_dataset",
+        node=EyesValidationDatasetConfig,
+    )
+
+    cs.store(
+        group="train_loader",
+        name="eyes_train_loader",
+        node=EyesTrainDataloaderConfig,
+    )
+    cs.store(
+        group="val_loader",
+        name="eyes_val_loader",
+        node=EyesValidationDataloaderConfig,
     )
