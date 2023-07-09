@@ -1,8 +1,8 @@
 from hydra_zen import instantiate
 from omegaconf import OmegaConf
 
-from src.data.datamodule import MNISTDataModule
-from src.model import Model
+from src.data import DataModule, CatSkinDataModule
+from src.model import Model, SegmentationModel
 from src.utils import set_seed
 
 
@@ -22,17 +22,34 @@ def train(config):
         optimizer=optimizer,
         loss=loss,
         scheduler=scheduler,
+        load_ckpt_path=exp.other.load_ckpt_path,
+        num_classes=exp.other.num_classes,
     )
 
-    datamodule = MNISTDataModule(
+    datamodule = DataModule(
         train_dataset=exp.train_dataset,
         train_loader=exp.train_loader,
         val_dataset=exp.val_dataset,
         val_loader=exp.val_loader,
-        test_dataset=exp.test_dataset,
-        test_loader=exp.test_loader,
         transforms=exp.transforms,
     )
+    
+    
+    # model = SegmentationModel(
+    #     model=architecture,
+    #     optimizer=optimizer,
+    #     loss=loss,
+    #     scheduler=scheduler,
+    # )
+
+    # datamodule = CatSkinDataModule(
+    #     train_dataset=exp.train_dataset,
+    #     train_loader=exp.train_loader,
+    #     val_dataset=exp.val_dataset,
+    #     val_loader=exp.val_loader,
+    #     transforms=exp.transforms,
+    # )
+    
 
     trainer.logger.watch(
         model=model,
@@ -43,8 +60,6 @@ def train(config):
     trainer.logger.experiment.config.update(OmegaConf.to_container(config))
 
     trainer.fit(model=model, datamodule=datamodule)
-
-    trainer.test(dataloaders=datamodule.test_dataloader())
 
 
 if __name__ == "__main__":

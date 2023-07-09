@@ -17,20 +17,19 @@ full_builds = make_custom_builds_fn(
 
 defaults = [
     "_self_",
-    {"architecture": "resnet"},
+    {"architecture": "timm_resnest50d"},
     {"optimizer": "adam"},
     {"loss": "bce_with_logits"},
     {"scheduler": "onecycle"},
-    {"train_dataset": "basic_train_dataset"},
-    {"val_dataset": "basic_val_dataset"},
-    {"test_dataset": "basic_test_dataset"},
-    {"train_loader": "basic_train_loader"},
-    {"val_loader": "basic_val_loader"},
-    {"test_loader": "basic_test_loader"},
+    {"train_dataset": "eyes_train_dataset"},
+    {"val_dataset": "eyes_val_dataset"},
+    {"train_loader": "eyes_train_loader"},
+    {"val_loader": "eyes_val_loader"},
     {"transforms": "basic"},
     {"trainer": "basic"},
     {"callbacks": "basic_callbacks"},
     {"logger": "wandb"},
+    {"other": "basic"},
 ]
 
 
@@ -43,14 +42,13 @@ class Config:
     scheduler: Any = MISSING
     train_dataset: Any = MISSING
     val_dataset: Any = MISSING
-    test_dataset: Any = MISSING
     train_loader: Any = MISSING
     val_loader: Any = MISSING
-    test_loader: Any = MISSING
     transforms: Any = MISSING
     trainer: Any = MISSING
     callbacks: Any = MISSING
     logger: Any = MISSING
+    other: Any = MISSING
 
 
 def register_configs():

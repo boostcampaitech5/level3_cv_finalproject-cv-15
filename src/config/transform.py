@@ -9,9 +9,6 @@ ResizeConfig = full_builds(Resize, height=512, width=512, always_apply=True)
 
 NormalizeConfig = full_builds(
     Normalize,
-    mean=(0.5, 0.5, 0.5),
-    std=(0.5, 0.5, 0.5),
-    max_pixel_value=255.0,
     always_apply=True,
 )
 
@@ -25,11 +22,21 @@ BasicConfig = full_builds(
     transforms=builds(
         list,
         [
+            NormalizeConfig,
             ToTensorV2Config,
         ],
     ),
 )
 
+SkinConfig = full_builds(
+    Compose,
+    transforms=builds(
+        list,
+        [
+            ResizeConfig
+        ],
+    ),
+)
 
 def _register_configs():
     cs = ConfigStore.instance()
@@ -39,3 +46,9 @@ def _register_configs():
         name="basic",
         node=BasicConfig,
     )
+    cs.store(
+        group="transforms",
+        name="skin",
+        node=SkinConfig,
+    )
+

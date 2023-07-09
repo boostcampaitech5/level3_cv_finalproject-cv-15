@@ -19,7 +19,7 @@ ModelCheckpointConfig = full_builds(
     monitor="val_loss",
     save_top_k=2,
     mode="min",
-    save_weights_only=False,
+    save_weights_only=True,
     auto_insert_metric_name=False,
 )
 
@@ -31,7 +31,7 @@ LearningRateMonitorConfig = full_builds(
 EarlyStoppingConfig = full_builds(
     EarlyStopping,
     monitor="val_loss",
-    patience=2,
+    patience=3,
     mode="min",
     strict=True,
     check_finite=True,
@@ -93,6 +93,13 @@ NoEalryCheckPointConfig = builds(
     ],
 )
 
+OnlyCheckPointConfig = builds(
+    list,
+    [
+        ModelCheckpointConfig,
+        LearningRateMonitorConfig,
+    ],
+)
 
 def _register_configs():
     cs = ConfigStore.instance()
@@ -103,3 +110,4 @@ def _register_configs():
     cs.store(
         group="callbacks", name="no_ealry_no_ckeckpoint", node=NoEalryCheckPointConfig
     )
+    cs.store(group="callbacks", name="only_checkpoint", node=OnlyCheckPointConfig)
