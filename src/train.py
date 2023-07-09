@@ -1,8 +1,7 @@
 from hydra_zen import instantiate
 from omegaconf import OmegaConf
 
-from src.data import DataModule, CatSkinDataModule
-from src.model import Model, SegmentationModel
+from src.data import DataModule
 from src.utils import set_seed
 
 
@@ -17,7 +16,7 @@ def train(config):
     scheduler = exp.scheduler
     trainer = exp.trainer(logger=exp.logger, callbacks=exp.callbacks)
 
-    model = Model(
+    model = exp.module(
         model=architecture,
         optimizer=optimizer,
         loss=loss,
@@ -33,23 +32,6 @@ def train(config):
         val_loader=exp.val_loader,
         transforms=exp.transforms,
     )
-    
-    
-    # model = SegmentationModel(
-    #     model=architecture,
-    #     optimizer=optimizer,
-    #     loss=loss,
-    #     scheduler=scheduler,
-    # )
-
-    # datamodule = CatSkinDataModule(
-    #     train_dataset=exp.train_dataset,
-    #     train_loader=exp.train_loader,
-    #     val_dataset=exp.val_dataset,
-    #     val_loader=exp.val_loader,
-    #     transforms=exp.transforms,
-    # )
-    
 
     trainer.logger.watch(
         model=model,
