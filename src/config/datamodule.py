@@ -61,6 +61,7 @@ EyesTrainDataloaderConfig = partial_builds(
     prefetch_factor=2,
     persistent_workers=True,
     pin_memory=True,
+    drop_last=True,
 )
 
 EyesValidationDataloaderConfig = partial_builds(
@@ -70,6 +71,7 @@ EyesValidationDataloaderConfig = partial_builds(
     prefetch_factor=2,
     persistent_workers=True,
     pin_memory=True,
+    drop_last=True,
 )
 
 CatSkinTrainDatasetConfig = partial_builds(
