@@ -54,14 +54,14 @@ class EyesDataSet(Dataset):
 
 
 class CatSkinDataset(Dataset):
-    def __init__(self, is_train=True, transforms=None, k_fold_num=5):
+    def __init__(self, is_train=True, transform=None, k_fold_num=5):
         cat_data_route = "../data/skin/cat/"
         cat_data_dir = os.listdir(cat_data_route)
         jsons = []
         imgs = []
         for name in cat_data_dir:
-            #if name == "무증상":
-            #    continue
+            if name == "무증상":
+                continue
             symptom_dir = os.listdir(os.path.join(cat_data_route, name))
             for dir_name in symptom_dir:
                 file_list = os.listdir(os.path.join(cat_data_route, name, dir_name))
@@ -98,8 +98,8 @@ class CatSkinDataset(Dataset):
         self.filenames = filenames 
         self.labelnames = labelnames 
         self.is_train = is_train
-        self.transforms = transforms
-        self.class_num = 6
+        self.transforms = transform
+        self.class_num = 3
         
         # cont = []
         # for name in filenames:
@@ -113,8 +113,8 @@ class CatSkinDataset(Dataset):
     def classDefine(self, fullname):
         result = 0
         temp = fullname.split("/")
-        if temp[4] == "유증상":
-            result += 3
+        #if temp[4] == "유증상":
+        #    result += 3
         if temp[5] == "A6_결절_종괴":
             result += 2
         if temp[5] == "A4_농포_여드름":

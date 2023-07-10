@@ -19,10 +19,18 @@ ResNetConfig = full_builds(
 
 UnetHrnetConfig = full_builds(
     UnetPlusPlus,
+    encoder_name="tu-hrnet_w64",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=3,
+)
+
+UnetDensenetConfig = full_builds(
+    UnetPlusPlus,
     encoder_name="tu-densenet201",
     encoder_weights="imagenet",
     in_channels=3,
-    classes=6,
+    classes=3,
 )
 
 TimmResNset50DConfig = TimmCreateModelConfig(model_name="resnest50d.in1k")
@@ -62,6 +70,11 @@ def _register_configs():
     cs.store(
         group="architecture",
         name="unetplusplushrnet",
+        node=UnetHrnetConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="unetplusplusdensenet",
         node=UnetHrnetConfig,
     )
     
