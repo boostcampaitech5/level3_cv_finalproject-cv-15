@@ -59,6 +59,7 @@ class SegmentationModel(LightningModule):
     def validation_step(self, batch: torch.Tensor, batch_idx: int) -> None:
         x, y = batch
         output = self.forward(x)
+        output = torch.sigmoid(output)
         output = (output > 0.5).detach().cpu()
         y = y.detach().cpu()
         loss = self.dice_coef(output, y)

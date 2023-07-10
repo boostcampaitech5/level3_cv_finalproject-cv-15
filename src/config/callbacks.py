@@ -104,7 +104,7 @@ OnlyCheckPointConfig = builds(
 SkinModelCheckpointConfig = full_builds(
     ModelCheckpoint,
     dirpath="checkpoint/${logger.name}",
-    filename="epoch={epoch:02d}-val_loss={val_loss:.2f}",
+    filename="epoch={epoch:02d}-dice_score={dice_score:.2f}",
     save_last=True,
     monitor="dice_score",
     save_top_k=2,
