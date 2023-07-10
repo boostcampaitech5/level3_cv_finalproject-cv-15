@@ -101,6 +101,38 @@ OnlyCheckPointConfig = builds(
     ],
 )
 
+SkinModelCheckpointConfig = full_builds(
+    ModelCheckpoint,
+    dirpath="checkpoint/${logger.name}",
+    filename="epoch={epoch:02d}-dice_score={dice_score:.2f}",
+    save_last=True,
+    monitor="dice_score",
+    save_top_k=2,
+    mode="max",
+    save_weights_only=True,
+    auto_insert_metric_name=False,
+)
+
+SkinEarlyStoppingConfig = full_builds(
+    EarlyStopping,
+    monitor="dice_score",
+    patience=3,
+    mode="max",
+    strict=True,
+    check_finite=True,
+)
+
+SkinCallbackConfig = builds(
+    list,
+    [
+        SkinModelCheckpointConfig,
+        LearningRateMonitorConfig,
+        SkinEarlyStoppingConfig,
+        RichModelSummaryConfig,
+        RichProgressBarConfig,
+    ],
+)
+
 def _register_configs():
     cs = ConfigStore.instance()
 
@@ -111,3 +143,4 @@ def _register_configs():
         group="callbacks", name="no_ealry_no_ckeckpoint", node=NoEalryCheckPointConfig
     )
     cs.store(group="callbacks", name="only_checkpoint", node=OnlyCheckPointConfig)
+    cs.store(group="callbacks", name="skin_callbacks", node=SkinCallbackConfig)
