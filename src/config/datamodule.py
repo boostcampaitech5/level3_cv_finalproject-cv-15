@@ -2,7 +2,7 @@ from hydra.core.config_store import ConfigStore
 from torch.utils.data import DataLoader
 
 from src.config import partial_builds
-from src.data import EyesDataSet, MNISTDataSet, CatSkinDataset
+from src.data import EyesDataSet, MNISTDataSet, CatSkinDataset, DogSkinDataset
 
 MNISTTrainDatasetConfig = partial_builds(
     MNISTDataSet,
@@ -105,6 +105,37 @@ CatSkinValidDataloaderConfig = partial_builds(
     pin_memory=True,
 )
 
+DogSkinTrainDatasetConfig = partial_builds(
+    DogSkinDataset,
+    is_train=True,
+    transforms=None,
+)
+
+DogSkinValidDatasetConfig = partial_builds(
+    DogSkinDataset,
+    is_train=False,
+    transforms=None,
+)
+
+DogSkinTrainDataloaderConfig = partial_builds(
+    DataLoader,
+    batch_size=8,
+    shuffle=True,
+    num_workers=6,
+    prefetch_factor=2,
+    persistent_workers=True,
+    pin_memory=True,
+)
+
+DogSkinValidDataloaderConfig = partial_builds(
+    DataLoader,
+    batch_size=8,
+    num_workers=6,
+    prefetch_factor=2,
+    persistent_workers=True,
+    pin_memory=True,
+)
+
 
 def _register_configs():
     cs = ConfigStore.instance()
@@ -175,4 +206,28 @@ def _register_configs():
         group="val_loader",
         name="catskin_val_loader",
         node=CatSkinValidDataloaderConfig,
+    )
+    
+    cs.store(
+        group="train_dataset",
+        name="dogskin_train_dataset",
+        node=DogSkinTrainDatasetConfig,
+    )
+    
+    cs.store(
+        group="val_dataset",
+        name="dogskin_val_dataset",
+        node=DogSkinValidDatasetConfig,
+    )
+
+    cs.store(
+        group="train_loader",
+        name="dogskin_train_loader",
+        node=DogSkinTrainDataloaderConfig,
+    )
+    
+    cs.store(
+        group="val_loader",
+        name="dogskin_val_loader",
+        node=DogSkinValidDataloaderConfig,
     )
