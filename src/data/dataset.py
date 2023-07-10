@@ -54,7 +54,7 @@ class EyesDataSet(Dataset):
 
 
 class CatSkinDataset(Dataset):
-    def __init__(self, is_train=True, transform=None, k_fold_num=5):
+    def __init__(self, is_train=True, transform=None, k_fold_num=0):
         cat_data_route = "../data/skin/cat/"
         cat_data_dir = os.listdir(cat_data_route)
         jsons = []
@@ -170,7 +170,7 @@ class CatSkinDataset(Dataset):
     
     
 class DogSkinDataset(Dataset):
-    def __init__(self, is_train=True, transforms=None, k_fold_num=5):
+    def __init__(self, is_train=True, transform=None, k_fold_num=0):
         self.disease_dict = {'유증상/A1_구진_플라크': 0, '유증상/A2_비듬_각질_상피성잔고리': 1, '유증상/A3_태선화_과다색소침착': 2, 
                     '유증상/A4_농포_여드름': 3, '유증상/A5_미란_궤양': 4, '유증상/A6_결절_종괴': 5, 
                     '무증상/A1_구진_플라크': 6, '무증상/A2_비듬_각질_상피성잔고리': 7, '무증상/A3_태선화_과다색소침착': 8, 
@@ -181,8 +181,8 @@ class DogSkinDataset(Dataset):
         jsons = []
         imgs = []
         for name in dog_data_dir:
-            # if name == "무증상":
-            #     continue
+            if name == "무증상":
+                continue
             symptom_dir = os.listdir(os.path.join(dog_data_route, name))
             for dir_name in symptom_dir:
                 file_list = os.listdir(os.path.join(dog_data_route, name, dir_name))
@@ -217,15 +217,16 @@ class DogSkinDataset(Dataset):
         self.filenames = filenames
         self.labelnames = labelnames
         self.is_train = is_train
-        self.transforms = transforms
-        self.class_num = 12
+        self.transform = transform
+        self.class_num = 6
+        print(f"len : {len(self.filenames)}")
         
     def __len__(self):
         return len(self.filenames)
     
     def classDefine(self, fullname):
         class_name = fullname.split('/')[7] + '/' + fullname.split('/')[8]
-        return self.disease_list[class_name]
+        return self.disease_dict[class_name]
     
     def __getitem__(self, item):
         image_name = self.filenames[item]
@@ -253,9 +254,9 @@ class DogSkinDataset(Dataset):
             points = np.array(points_list, np.int32)
             class_idx = self.classDefine(label_name)
             label[..., class_idx] = cv2.fillPoly(class_label, [points], 1)
-        if self.transforms is not None:
+        if self.transform is not None:
             inputs = {"image": image, "mask": label}
-            result = self.transforms(**inputs)
+            result = self.transform(**inputs)
             image = result["image"]
             label = result["mask"]
         image = image.transpose(2, 0, 1)

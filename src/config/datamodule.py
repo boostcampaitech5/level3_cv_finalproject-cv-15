@@ -108,13 +108,13 @@ CatSkinValidDataloaderConfig = partial_builds(
 DogSkinTrainDatasetConfig = partial_builds(
     DogSkinDataset,
     is_train=True,
-    transforms=None,
+    transform=None,
 )
 
 DogSkinValidDatasetConfig = partial_builds(
     DogSkinDataset,
     is_train=False,
-    transforms=None,
+    transform=None,
 )
 
 DogSkinTrainDataloaderConfig = partial_builds(

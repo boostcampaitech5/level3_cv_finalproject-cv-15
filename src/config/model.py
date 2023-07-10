@@ -33,6 +33,22 @@ UnetDensenetConfig = full_builds(
     classes=3,
 )
 
+UnetHrnetDogConfig = full_builds(
+    UnetPlusPlus,
+    encoder_name="tu-hrnet_w64",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=6,
+)
+
+UnetDensenetDogConfig = full_builds(
+    UnetPlusPlus,
+    encoder_name="tu-densenet201",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=6,
+)
+
 TimmResNset50DConfig = TimmCreateModelConfig(model_name="resnest50d.in1k")
 TimmResNset101EConfig = TimmCreateModelConfig(model_name="resnest101e.in1k")
 TimmResNset200EConfig = TimmCreateModelConfig(model_name="resnest200e.in1k")
@@ -76,5 +92,15 @@ def _register_configs():
         group="architecture",
         name="unetplusplusdensenet",
         node=UnetHrnetConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="unetplusplushrnet_dog",
+        node=UnetHrnetDogConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="unetplusplusdensenet_dog",
+        node=UnetHrnetDogConfig,
     )
     
