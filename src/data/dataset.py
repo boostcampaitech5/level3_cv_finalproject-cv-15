@@ -54,7 +54,7 @@ class EyesDataSet(Dataset):
 
 
 class CatSkinDataset(Dataset):
-    def __init__(self, is_train=True, transform=None, k_fold_num=5):
+    def __init__(self, is_train=True, transform=None, k_fold_num=0):
         cat_data_route = "../data/skin/cat/"
         cat_data_dir = os.listdir(cat_data_route)
         jsons = []

@@ -23,6 +23,7 @@ class SegmentationModel(LightningModule):
         self.optimizer = optimizer
         self.scheduler = scheduler
         self.example_input_array = torch.zeros(1, 3, 32, 32)
+        self.dice_score = []
 
     def dice_coef(self, y_true, y_pred):
         y_true_f = y_true.flatten(2)
@@ -51,8 +52,9 @@ class SegmentationModel(LightningModule):
         )
         return loss
     
-    def on_validation_batch_start(self, batch: Any, batch_idx: int, dataloader_idx: int = 0) -> None:
+    def on_validation_epoch_start(self) -> None:
         self.dice_score = []
+        return super().on_validation_epoch_start()
     
     def validation_step(self, batch: torch.Tensor, batch_idx: int) -> None:
         x, y = batch
@@ -79,7 +81,7 @@ class SegmentationModel(LightningModule):
             )
         
         self.log(
-            name="val_loss",
+            name="dice_score",
             value=avg_dice,
             on_step=False,
             on_epoch=True,
