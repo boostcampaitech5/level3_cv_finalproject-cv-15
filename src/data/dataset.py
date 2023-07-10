@@ -186,7 +186,7 @@ class DogSkinDataset(Dataset):
             symptom_dir = os.listdir(os.path.join(dog_data_route, name))
             for dir_name in symptom_dir:
                 file_list = os.listdir(os.path.join(dog_data_route, name, dir_name))
-                print(len(file_list))
+                # print(len(file_list))
                 for file_name in file_list:
                     temp = file_name.split(".")
                     if temp[-1] == "json":
@@ -203,7 +203,7 @@ class DogSkinDataset(Dataset):
         filenames = []
         labelnames = []
         for i, (x, y) in enumerate(gkf.split(imgs, groups=groups)):
-            print(i, len(x), len(y))
+            # print(i, len(x), len(y))
             if is_train:
                 if i == k_fold_num:
                     continue
@@ -219,7 +219,7 @@ class DogSkinDataset(Dataset):
         self.is_train = is_train
         self.transform = transform
         self.class_num = 6
-        print(f"len : {len(self.filenames)}")
+        # print(f"len : {len(self.filenames)}")
         
     def __len__(self):
         return len(self.filenames)
