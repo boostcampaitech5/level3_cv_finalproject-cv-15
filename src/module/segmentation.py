@@ -1,3 +1,5 @@
+from typing import Any
+from typing import Union
 import torch
 from lightning import LightningModule
 from torch import nn
@@ -12,6 +14,8 @@ class SegmentationModel(LightningModule):
         optimizer: Optimizer,
         loss: nn.Module,
         scheduler: LRScheduler,
+        load_ckpt_path: Union[str, None] = None,
+        num_classes: Union[int, None] = None,
     ):
         super().__init__()
         self.model = model
@@ -46,19 +50,42 @@ class SegmentationModel(LightningModule):
             logger=True,
         )
         return loss
-
+    
+    def on_validation_batch_start(self, batch: Any, batch_idx: int, dataloader_idx: int = 0) -> None:
+        self.dice_score = []
+    
     def validation_step(self, batch: torch.Tensor, batch_idx: int) -> None:
         x, y = batch
-        pred = self.forward(x)
-        loss = self.dice_coef(pred, y)
+        output = self.forward(x)
+        output = (output > 0.5).detach().cpu()
+        y = y.detach().cpu()
+        loss = self.dice_coef(output, y)
+        self.dice_score.append(loss)
 
+        return loss
+        
+    def on_validation_epoch_end(self) -> None:
+        dices = torch.cat(self.dice_score, 0)
+        dice_per_class = torch.mean(dices, 0)
+        avg_dice = torch.mean(dice_per_class).item()
+        
+        for class_idx, score in enumerate(dice_per_class):
+            self.log(
+                name="%d_class_dice_score" % class_idx,
+                value=score,
+                on_step=False,
+                on_epoch=True,
+                logger=True,
+            )
+        
         self.log(
             name="val_loss",
-            value=loss,
-            on_step=True,
-            on_epoch=False,
+            value=avg_dice,
+            on_step=False,
+            on_epoch=True,
             logger=True,
         )
+        return avg_dice
 
     def configure_optimizers(self):
         optimizer = self.optimizer(params=self.parameters())

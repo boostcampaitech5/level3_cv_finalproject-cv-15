@@ -77,20 +77,20 @@ EyesValidationDataloaderConfig = partial_builds(
 CatSkinTrainDatasetConfig = partial_builds(
     CatSkinDataset,
     is_train=True,
-    transforms=None,
+    transform=None,
 )
 
 CatSkinValidDatasetConfig = partial_builds(
     CatSkinDataset,
     is_train=False,
-    transforms=None,
+    transform=None,
 )
 
 CatSkinTrainDataloaderConfig = partial_builds(
     DataLoader,
     batch_size=8,
     shuffle=True,
-    num_workers=6,
+    num_workers=7,
     prefetch_factor=2,
     persistent_workers=True,
     pin_memory=True,
@@ -99,7 +99,7 @@ CatSkinTrainDataloaderConfig = partial_builds(
 CatSkinValidDataloaderConfig = partial_builds(
     DataLoader,
     batch_size=8,
-    num_workers=6,
+    num_workers=7,
     prefetch_factor=2,
     persistent_workers=True,
     pin_memory=True,
