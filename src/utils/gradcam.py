@@ -31,9 +31,9 @@ class HookBwd:
         self.hook.remove()
 
 
-def get_gradcam(model, x, location=-1):
+def get_gradcam(model, x, backward_class=-1, location=-1):
     conv_layers = []
-
+    idx = backward_class
     for module in model.modules():
         if isinstance(module, nn.Conv2d):
             conv_layers.append(module)
@@ -41,7 +41,8 @@ def get_gradcam(model, x, location=-1):
     with HookBwd(conv_layers[location]) as hookg:
         with Hook(conv_layers[location]) as hook:
             output = model.eval()(x)
-            idx = torch.argmax(output)
+            if idx == -1:
+                idx = torch.argmax(output)
             act = hook.stored
         output[0, idx].backward()
         grad = hookg.stored
