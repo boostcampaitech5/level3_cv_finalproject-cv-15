@@ -28,6 +28,10 @@ segmentation-models-pytorch = "^0.3.3"
 pandas = "^2.0.2"
 transformers = "^4.30.2"
 optuna = "^3.2.0"
+fastapi = {extras = ["all"], version = "^0.100.0"}
+celery = {extras = ["redis"], version = "^5.3.1"}
+synology-api = "^0.6.2"
+python-dotenv = "^1.0.0"
 
 [tool.black]
 line-length = 88
