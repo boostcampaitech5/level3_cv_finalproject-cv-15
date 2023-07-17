@@ -3,7 +3,7 @@ from timm import create_model
 
 from src.config import full_builds
 from src.models import ResNet
-from segmentation_models_pytorch import UnetPlusPlus
+from segmentation_models_pytorch import UnetPlusPlus, MAnet
 
 TimmCreateModelConfig = full_builds(
     create_model, pretrained=True, num_classes="${other.num_classes}"
@@ -44,6 +44,14 @@ UnetHrnetDogConfig = full_builds(
 UnetDensenetDogConfig = full_builds(
     UnetPlusPlus,
     encoder_name="tu-densenet201",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=6,
+)
+
+MAnetHrnetDogConfig = full_builds(
+    MAnet,
+    encoder_name="mit_b5",
     encoder_weights="imagenet",
     in_channels=3,
     classes=6,
@@ -102,5 +110,10 @@ def _register_configs():
         group="architecture",
         name="unetplusplusdensenet_dog",
         node=UnetHrnetDogConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="manethrnet_dog",
+        node=MAnetHrnetDogConfig,
     )
     

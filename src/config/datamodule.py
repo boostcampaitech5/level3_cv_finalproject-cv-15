@@ -119,7 +119,7 @@ DogSkinValidDatasetConfig = partial_builds(
 
 DogSkinTrainDataloaderConfig = partial_builds(
     DataLoader,
-    batch_size=8,
+    batch_size=4,
     shuffle=True,
     num_workers=6,
     prefetch_factor=2,
@@ -129,7 +129,7 @@ DogSkinTrainDataloaderConfig = partial_builds(
 
 DogSkinValidDataloaderConfig = partial_builds(
     DataLoader,
-    batch_size=8,
+    batch_size=4,
     num_workers=6,
     prefetch_factor=2,
     persistent_workers=True,

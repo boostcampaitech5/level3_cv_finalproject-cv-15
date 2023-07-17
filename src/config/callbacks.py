@@ -116,7 +116,7 @@ SkinModelCheckpointConfig = full_builds(
 SkinEarlyStoppingConfig = full_builds(
     EarlyStopping,
     monitor="dice_score",
-    patience=3,
+    patience=10,
     mode="max",
     strict=True,
     check_finite=True,

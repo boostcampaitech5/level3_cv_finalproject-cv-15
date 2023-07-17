@@ -7,6 +7,8 @@ from src.config import full_builds
 
 ResizeConfig = full_builds(Resize, height=512, width=512, always_apply=True)
 
+ResizeConfig2 = full_builds(Resize, height=512, width=1024, always_apply=True)
+
 NormalizeConfig = full_builds(
     Normalize,
     always_apply=True,
@@ -38,6 +40,16 @@ SkinConfig = full_builds(
     ),
 )
 
+SkinConfig2 = full_builds(
+    Compose,
+    transforms=builds(
+        list,
+        [
+            ResizeConfig2
+        ],
+    ),
+)
+
 def _register_configs():
     cs = ConfigStore.instance()
 
@@ -50,5 +62,10 @@ def _register_configs():
         group="transforms",
         name="skin",
         node=SkinConfig,
+    )
+    cs.store(
+        group="transforms",
+        name="skin2",
+        node=SkinConfig2,
     )
 

@@ -14,7 +14,7 @@ def train(config):
     optimizer = exp.optimizer
     loss = exp.loss
     scheduler = exp.scheduler
-    trainer = exp.trainer(logger=exp.logger, callbacks=exp.callbacks)
+    trainer = exp.trainer(logger=exp.logger, precision=16, callbacks=exp.callbacks)
 
     model = exp.module(
         model=architecture,

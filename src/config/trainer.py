@@ -17,7 +17,7 @@ TrainerConfig = partial_builds(
     gradient_clip_algorithm="norm",
     gradient_clip_val=1.0,
     log_every_n_steps=1,
-    check_val_every_n_epoch=1,
+    check_val_every_n_epoch=3,
     accelerator="gpu",
     devices="auto",
 )

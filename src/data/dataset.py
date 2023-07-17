@@ -176,7 +176,7 @@ class DogSkinDataset(Dataset):
                     '무증상/A1_구진_플라크': 6, '무증상/A2_비듬_각질_상피성잔고리': 7, '무증상/A3_태선화_과다색소침착': 8, 
                     '무증상/A4_농포_여드름': 9, '무증상/A5_미란_궤양': 10, '무증상/A6_결절_종괴': 11}
         
-        dog_data_route = "/opt/ml/data/skin/train/dog"
+        dog_data_route = "/opt/ml/data/skin/dog"
         dog_data_dir = os.listdir(dog_data_route)
         jsons = []
         imgs = []
@@ -225,7 +225,7 @@ class DogSkinDataset(Dataset):
         return len(self.filenames)
     
     def classDefine(self, fullname):
-        class_name = fullname.split('/')[7] + '/' + fullname.split('/')[8]
+        class_name = fullname.split('/')[6] + '/' + fullname.split('/')[7]
         return self.disease_dict[class_name]
     
     def __getitem__(self, item):
