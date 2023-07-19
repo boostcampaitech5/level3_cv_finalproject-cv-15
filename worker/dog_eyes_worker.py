@@ -4,13 +4,13 @@ import albumentations as A
 import cv2
 import torch
 from albumentations.pytorch import ToTensorV2
+from celery import Celery
+from celery.utils.log import get_task_logger
 from dotenv import load_dotenv
 from synology_api import filestation
 from timm import create_model
 from torch.nn.functional import sigmoid
 
-from celery import Celery
-from celery.utils.log import get_task_logger
 from utils import apply_heatmap, get_gradcam
 
 load_dotenv()
@@ -67,15 +67,14 @@ def dog_eyes(image_path):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     x = transform(image=img)["image"].unsqueeze(0)
     x = x.to(device=device)
-    for i in range(5):
-        heatmap, output = get_gradcam(model, x, backward_class=i)
-        result = apply_heatmap(img, heatmap.detach().cpu().numpy())
-        cv2.imwrite("./temp/" + image_path + f"_{i}" + ".jpg", result)
-        fl.upload_file(
-            dest_path="/BoostCamp/Result_Image",
-            file_path="./temp/" + image_path + f"_{i}" + ".jpg",
-        )
-        os.remove("./temp/" + image_path + f"_{i}" + ".jpg")
+    heatmap, output = get_gradcam(model, x)
+    result = apply_heatmap(img, heatmap.detach().cpu().numpy())
+    cv2.imwrite("./temp/" + image_path + "_gradcam.jpg", result)
+    fl.upload_file(
+        dest_path="/BoostCamp/Result_Image",
+        file_path="./temp/" + image_path + "_gradcam.jpg",
+    )
+    os.remove("./temp/" + image_path + "_gradcam.jpg")
     os.remove("./temp/" + image_path + ".jpg")
     output = sigmoid(output)
     return {"image_path": image_path, "output": output.detach().cpu().numpy().tolist()}
