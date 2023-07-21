@@ -13,7 +13,13 @@ celery_obj = Celery(
 
 
 @app.get("/dog_eye_predict/")
-async def predict(path: str):
+async def dog_eye_predict(path: str):
     result = celery_obj.send_task("dog_eyes", args=[path], queue="dog_eyes")
 
+    return result.get()
+
+
+@app.get("/cat_skin_seg/")
+async def cat_skin_predict(path: str):
+    result = celery_obj.send_task("cat_skin", args=[path], queue="cat_skin")
     return result.get()
