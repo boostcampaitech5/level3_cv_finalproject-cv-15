@@ -251,7 +251,7 @@ def main():
 
             os.remove("./temp/" + image_name + "_gradcam.jpg")
 
-            with open("demo/disease.json", "r") as f:
+            with open("disease.json", "r") as f:
                 json_data = json.load(f)
 
             time.sleep(1)

@@ -191,7 +191,7 @@ def main():
                 f'<p class="disease">🐶 {cat_skin_class[int(result["output"])]} 질환이 의심됩니다.</p>',
                 unsafe_allow_html=True,
             )
-            with open("demo/disease.json", "r") as f:
+            with open("disease.json", "r") as f:
                 json_data = json.load(f)
 
             st.markdown(
@@ -219,7 +219,7 @@ def main():
                 f'<p class="disease">😺 {cat_skin_class[int(result["output"])]} 질환이 의심됩니다.</p>',
                 unsafe_allow_html=True,
             )
-            with open("demo/disease.json", "r") as f:
+            with open("disease.json", "r") as f:
                 json_data = json.load(f)
 
             st.markdown(
