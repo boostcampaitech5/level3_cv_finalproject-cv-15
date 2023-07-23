@@ -173,7 +173,7 @@ def main():
 
         if dog_button:
             response = requests.get(
-                "http://49.50.166.238:30008/cat_skin_seg?path={image_name}",
+                "http://localhost:8000/dog_skin_seg?path={image_name}",
                 params={"path": image_name},
             )
 
