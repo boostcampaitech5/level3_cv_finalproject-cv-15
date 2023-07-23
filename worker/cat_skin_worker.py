@@ -25,9 +25,7 @@ fl = filestation.FileStation(
 
 transform = A.Compose(
     [
-        A.LongestMaxSize(400),
-        A.PadIfNeeded(416, 416, border_mode=0),
-        A.Normalize(),
+        A.Resize(512, 1024),
         ToTensorV2(),
     ]
 )
