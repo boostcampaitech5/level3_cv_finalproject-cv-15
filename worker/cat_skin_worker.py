@@ -55,36 +55,29 @@ model.eval()
 model.to(device=device)
 
 
-def plot_cat_skin_seg(img, pred):
+def PlotCatSkinSeg(img, pred):
     pred = pred.squeeze()
     pred = torch.sigmoid(pred).detach().cpu()
-
     pred_thresh = pred > 0.5
-
     chan, height, width = pred.shape
-
     colors = [(138, 43, 226), (188, 238, 104), (255, 215, 0)]
-
     num_cont = np.zeros(chan)
     height_cont = np.zeros(chan)
     width_cont = np.zeros(chan)
-
     for c in range(chan):
         pred_thresh_c = pred_thresh[c]
         coords_c = np.stack(np.where(pred_thresh_c), axis=1)
         num_coords_c = coords_c.shape[0]
-
         if num_coords_c > 0:
             num_cont[c] = num_coords_c
             height_cont[c] = np.sum(coords_c[:, 0])
             width_cont[c] = np.sum(coords_c[:, 1])
-
     idx = np.argmax(num_cont)
+    print(num_cont[idx])
     if num_cont[idx] > 100:
-        height = int(height_cont[idx] / num_cont[idx])
-        width = int(width_cont[idx] / num_cont[idx])
+        height = int(height_cont[idx] / num_cont[idx] * img.shape[0] / pred.shape[1])
+        width = int(width_cont[idx] / num_cont[idx] * img.shape[1] / pred.shape[2])
         img = cv2.circle(img, (width, height), 40, colors[idx], 3)
-
     return img, idx
 
 
@@ -99,9 +92,10 @@ def cat_skin(image_path):
     img = cv2.imread("./temp/" + image_path + ".jpg")
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     x = transform(image=img)["image"].unsqueeze(0)
+    x = x / 255.0
     x = x.to(device=device)
     output = model.predict(x)
-    result, idx = plot_cat_skin_seg(img, output)
+    result, idx = PlotCatSkinSeg(img, output)
     cv2.imwrite("./temp/" + image_path + "_seg.jpg", result)
 
     fl.upload_file(
