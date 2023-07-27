@@ -87,7 +87,7 @@ async def generate_image(image_path: str):
     with torch.no_grad():
         viz = []
         # load content image
-        image = load_image("../temp/" + image_path + ".jpeg").to(device)
+        image = load_image("../temp/" + image_path + ".jpg").to(device)
         viz += [image]
 
         # reconstructed content image and its intrinsic style code
