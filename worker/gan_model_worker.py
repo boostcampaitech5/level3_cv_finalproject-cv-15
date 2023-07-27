@@ -33,7 +33,7 @@ app.conf.task_routes = {
 def gan_model(image_path):
     logger.info(f"input image path : {image_path}")
     fl.get_file(
-        path="/BoostCamp/Inference_Image/" + image_path + ".jpeg",
+        path="/BoostCamp/Inference_Image/" + image_path + ".jpg",
         mode="download",
         dest_path="../temp",
     )
