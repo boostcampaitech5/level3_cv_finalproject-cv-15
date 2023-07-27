@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>동물병원 지도</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1734c80e9d342bf7f24b0e64b4c2e6b9&libraries=services"></script>
+    <link href="{{ url_for('static', path='/css/normalize.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', path='/css/webflow.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', path='/css/hype-sqaud.webflow.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', path='/images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url_for('static', path='/images/webclip.png') }}" rel="apple-touch-icon">
+</head>
+
+<body>
+    <div id="title" style="text-align: center;font-size: 40px;margin-bottom: 40px;margin-top: 40px;">주변 동물병원</div>
+    <div id="map-container" style="width: 600px; height: 600px; margin: 0 auto;">
+        <div id="map" style="width:100%; height:100%;"></div>
+    </div>
+    <div class="button-container">
+        <a href="http://localhost:8000/landing/?id={{id}}" class="gotodemo-button w-button"><strong>나가기</strong></a>
+      </div>
+
+
+    <script>
+        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+        var centerX = 37.510976;
+        var centerY = 127.021909;
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(centerX, centerY),
+            level: 5
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        var imageSrc = `{{ url_for('static', path='/images/red_marker.png') }}`,
+            imageSize = new kakao.maps.Size(64, 69),
+            imageOption = { offset: new kakao.maps.Point(27, 69) };
+
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+            markerPosition = new kakao.maps.LatLng(centerX, centerY);
+
+        var marker = new kakao.maps.Marker({
+            position: markerPosition,
+            image: markerImage
+        });
+
+        marker.setMap(map);
+
+        var ps = new kakao.maps.services.Places();
+
+        var displayMarker = function (place) {
+
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(place.y, place.x)
+            });
+
+            kakao.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(
+                    '<div style="padding:5px; font-size:12px; width: max-content;">' +
+                    "이름 : " + place.place_name + "<br>" +
+                    "전화번호 : " + place.phone + "<br>" +
+                    "도로명주소 : " + place.road_address_name + "<br>" +
+                    "거리 : " + place.distance + "m</div>");
+                infowindow.open(map, marker);
+            });
+        }
+
+        var placesSearchCB = function (data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
+
+                var bounds = new kakao.maps.LatLngBounds();
+                for (var i = 0; i < data.length; i++) {
+                    displayMarker(data[i]);
+                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                }
+
+                map.setBounds(bounds);
+            }
+        }
+
+        ps.keywordSearch(
+            '동물병원',
+            placesSearchCB,
+            {
+                location: new kakao.maps.LatLng(centerX, centerY),
+                radius: 2000
+            }
+        );
+
+    </script>
+</body>
+
+</html>
