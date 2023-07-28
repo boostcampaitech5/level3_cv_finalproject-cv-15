@@ -122,3 +122,6 @@ test.py
 
 # hydra log
 /outputs
+
+# worker temp directory
+/worker/temp
