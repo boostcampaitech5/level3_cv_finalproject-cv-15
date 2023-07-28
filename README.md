@@ -1,6 +1,6 @@
 # 제목 없음
 
-[https://github.com/boostcampaitech5/level2_cv_semanticsegmentation-cv-15/assets/113486402/d3bca362-3b1d-4a6a-8982-6836656793f5](https://github.com/boostcampaitech5/level2_cv_semanticsegmentation-cv-15/assets/113486402/d3bca362-3b1d-4a6a-8982-6836656793f5)
+![image](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/0f275485-7d23-4a7f-81d7-e0d419a8acc1)
 
 ## 🐾 HYPETCARE - 반려동물 질병 예측 서비스
 
@@ -19,12 +19,12 @@
 
 ---
 
-```python
+
 -------------
 |![logo1](https://github.com/boostcampaitech5/level2_objectdetection-cv-15/assets/99079272/53873dd9-69cc-4fe6-ba8f-034d8860cefe)|![logo2](https://github.com/suhyehye/Machine-Learning/assets/99079272/72269432-21c6-4176-90cb-cbaaa2bf0b84)|![logo3](https://github.com/suhyehye/Machine-Learning/assets/99079272/15cadbf0-98ed-4f93-86df-9a0a1aacc0ba)|![logo4](https://github.com/suhyehye/Machine-Learning/assets/99079272/fb487344-cf32-4eda-8639-f58039c7c14b)|![logo5](https://github.com/suhyehye/Machine-Learning/assets/99079272/03fa4a9d-dac4-42b5-ab5e-432e7fce8935)|
 | --- | --- | --- | --- |  --- |
 | [김용우](https://github.com/yongwookim1) | [박종서](https://github.com/justinpark820) | [서영덕](https://github.com/SeoYoungDeok) |[신현준](https://github.com/june95) |[조수혜](https://github.com/suhyehye) |
-```
+
 
 ### **📆** 프로젝트 일정 : 2023.06.30 ~ 2023.07.28
 
