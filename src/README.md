@@ -1,6 +1,6 @@
 # 제목 없음
 
-[https://github.com/boostcampaitech5/level2_cv_semanticsegmentation-cv-15/assets/113486402/d3bca362-3b1d-4a6a-8982-6836656793f5](https://github.com/boostcampaitech5/level2_cv_semanticsegmentation-cv-15/assets/113486402/d3bca362-3b1d-4a6a-8982-6836656793f5)
+![image](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/0f275485-7d23-4a7f-81d7-e0d419a8acc1)
 
 ## 🐕 Dataset - 피부
 
