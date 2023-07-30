@@ -6,14 +6,14 @@
 - 반려동물을 디즈니 공주 캐릭터로 바꿔주는 생성 모델을 사용해볼 수 있다.
 
 ## 👀 시연 영상
-
 [![Video Label](http://img.youtube.com/vi/XNFxTloiSM4/0.jpg)](https://youtu.be/XNFxTloiSM4)
 
 ## 👨🏻‍💻 👩🏻‍💻 팀 구성
 
-|![logo1](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/31b76c86-6554-49a7-ac6b-0de02b6b815b)|![logo2](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/aad157e9-746a-4bce-8387-c77d5b0018c1)|![logo3](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/27320948-6273-4caf-897a-2061dd700427)|![logo4](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/9dcf63a8-6956-42c2-b815-fc8a6117e707)|![logo5](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/640a3382-9c34-45fc-9431-c7b8926ad6fa)|
+| 김용우 | 박종서 | 서영덕 | 신현준 | 조수혜|
 |:---:|:---:|:---:|:---:|:---:|
-| [김용우](https://github.com/yongwookim1) | [박종서](https://github.com/justinpark820) | [서영덕](https://github.com/SeoYoungDeok) |[신현준](https://github.com/june95) |[조수혜](https://github.com/suhyehye) |
+|![logo1](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/31b76c86-6554-49a7-ac6b-0de02b6b815b)|![logo2](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/aad157e9-746a-4bce-8387-c77d5b0018c1)|![logo3](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/27320948-6273-4caf-897a-2061dd700427)|![logo4](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/9dcf63a8-6956-42c2-b815-fc8a6117e707)|![logo5](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/640a3382-9c34-45fc-9431-c7b8926ad6fa)|
+| [GitHub](https://github.com/yongwookim1) | [GitHub](https://github.com/justinpark820) | [GitHub](https://github.com/SeoYoungDeok) |[GitHub](https://github.com/june95) |[GitHub](https://github.com/suhyehye) |
 
 
 ## **📆** 프로젝트 일정 : 2023.06.30 ~ 2023.07.28
@@ -64,7 +64,7 @@
 - 강아지 피부 : ConvNext(encoder), Cascade-RCNN(decoder)
 - 고양이 피부 : MANet(encoder), HRNet(decoder)
 - 강아지 안구 : ResNest50
-- 고양이 안구 : ViT_small_patch16
+- 고양이 안구 : ResNest50
 - 안구 detection : Yolov3(backbone: darknet53)
 - 생성 모델 : DualStyleGAN
 
