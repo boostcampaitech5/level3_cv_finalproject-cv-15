@@ -7,7 +7,7 @@
 
 ## 👀 시연 영상
 
-[![Video Label][http://img.youtube.com/vi/XNFxTloiSM4/0.jpg]](https://youtu.be/XNFxTloiSM4)
+[![Video Label](http://img.youtube.com/vi/XNFxTloiSM4/0.jpg)](https://youtu.be/XNFxTloiSM4)
 
 ## 👨🏻‍💻 👩🏻‍💻 팀 구성
 
