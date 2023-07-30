@@ -1,24 +1,15 @@
-# 제목 없음
-
-![image](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/0f275485-7d23-4a7f-81d7-e0d419a8acc1)
+![image](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/aac9514b-96eb-45b7-a1a0-e526406675e9)
 
 ## 🐾 HYPETCARE - 반려동물 질병 예측 서비스
-
----
 
 - 동물 병원 방문이 쉽지 않은 일반 사용자들에게 스마트폰으로 촬영한 사진으로 간편하게 안구, 피부 질병에 대해 진단 받아 반려동물의 건강을 집에서도 예측하고 관리할 수 있다.
 - 반려동물을 디즈니 공주 캐릭터로 바꿔주는 생성 모델을 사용해볼 수 있다.
 
 ## 👀 시연 영상
 
----
-
-- 링크 예정
+[![Video Label][http://img.youtube.com/vi/XNFxTloiSM4/0.jpg]](https://youtu.be/XNFxTloiSM4)
 
 ## 👨🏻‍💻 👩🏻‍💻 팀 구성
-
----
-
 
 -------------
 |![logo1](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/31b76c86-6554-49a7-ac6b-0de02b6b815b)|![logo2](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/aad157e9-746a-4bce-8387-c77d5b0018c1)|![logo3](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/27320948-6273-4caf-897a-2061dd700427)|![logo4](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/9dcf63a8-6956-42c2-b815-fc8a6117e707)|![logo5](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/640a3382-9c34-45fc-9431-c7b8926ad6fa)|
@@ -28,21 +19,15 @@
 
 ### **📆** 프로젝트 일정 : 2023.06.30 ~ 2023.07.28
 
----
-
-<img width="1070" alt="Untitled" src="https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/fdfaf107-97d9-47f0-ad01-dc45c656a99b">
+<img width="1070" alt="Untitled (1)" src="https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/92fb1fa9-2df9-44fc-8266-abd9d2bcaeac">
 
 
 ### 📲 서비스 아키텍쳐
 
----
-
-![Untitled 1](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/40fe3a6e-3dd6-4671-90fe-2d34f0f123af)
+![Untitled (2)](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/372a9313-ba1e-450c-88f8-a3f7fc0a426e)
 
 
 ## 🍀 Folder Structure
-
----
 
 ```
 ├── DualStyleGAN  
@@ -77,8 +62,6 @@
 
 ## 💫 Final Model
 
----
-
 - 강아지 피부 : ConvNext(encoder), Cascade-RCNN(decoder)
 - 고양이 피부 : MANet(encoder), HRNet(decoder)
 - 강아지 안구 : ResNest50
@@ -87,8 +70,6 @@
 - 생성 모델 : DualStyleGAN
 
 ## 🔍 Reference 및 출처
-
----
 
 - pytorch lightining : [https://github.com/Lightning-AI/lightning](https://github.com/Lightning-AI/lightning)
 - hydra-zen : [https://github.com/mit-ll-responsible-ai/hydra-zen](https://github.com/mit-ll-responsible-ai/hydra-zen)
