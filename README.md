@@ -11,18 +11,17 @@
 
 ## 👨🏻‍💻 👩🏻‍💻 팀 구성
 
--------------
 |![logo1](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/31b76c86-6554-49a7-ac6b-0de02b6b815b)|![logo2](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/aad157e9-746a-4bce-8387-c77d5b0018c1)|![logo3](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/27320948-6273-4caf-897a-2061dd700427)|![logo4](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/9dcf63a8-6956-42c2-b815-fc8a6117e707)|![logo5](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/640a3382-9c34-45fc-9431-c7b8926ad6fa)|
-| --- | --- | --- | --- |  --- |
+|:---:|:---:|:---:|:---:|:---:|
 | [김용우](https://github.com/yongwookim1) | [박종서](https://github.com/justinpark820) | [서영덕](https://github.com/SeoYoungDeok) |[신현준](https://github.com/june95) |[조수혜](https://github.com/suhyehye) |
 
 
-### **📆** 프로젝트 일정 : 2023.06.30 ~ 2023.07.28
+## **📆** 프로젝트 일정 : 2023.06.30 ~ 2023.07.28
 
 <img width="1070" alt="Untitled (1)" src="https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/92fb1fa9-2df9-44fc-8266-abd9d2bcaeac">
 
 
-### 📲 서비스 아키텍쳐
+## 📲 서비스 아키텍쳐
 
 ![Untitled (2)](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/372a9313-ba1e-450c-88f8-a3f7fc0a426e)
 
