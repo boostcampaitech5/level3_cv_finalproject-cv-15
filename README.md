@@ -21,7 +21,7 @@
 
 
 -------------
-|![logo1](https://github.com/boostcampaitech5/level2_objectdetection-cv-15/assets/99079272/53873dd9-69cc-4fe6-ba8f-034d8860cefe)|![logo2](https://github.com/suhyehye/Machine-Learning/assets/99079272/72269432-21c6-4176-90cb-cbaaa2bf0b84)|![logo3](https://github.com/suhyehye/Machine-Learning/assets/99079272/15cadbf0-98ed-4f93-86df-9a0a1aacc0ba)|![logo4](https://github.com/suhyehye/Machine-Learning/assets/99079272/fb487344-cf32-4eda-8639-f58039c7c14b)|![logo5](https://github.com/suhyehye/Machine-Learning/assets/99079272/03fa4a9d-dac4-42b5-ab5e-432e7fce8935)|
+|![logo1](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/31b76c86-6554-49a7-ac6b-0de02b6b815b)|![logo2](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/aad157e9-746a-4bce-8387-c77d5b0018c1)|![logo3](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/27320948-6273-4caf-897a-2061dd700427)|![logo4](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/9dcf63a8-6956-42c2-b815-fc8a6117e707)|![logo5](https://github.com/boostcampaitech5/level3_cv_finalproject-cv-15/assets/59987079/640a3382-9c34-45fc-9431-c7b8926ad6fa)|
 | --- | --- | --- | --- |  --- |
 | [김용우](https://github.com/yongwookim1) | [박종서](https://github.com/justinpark820) | [서영덕](https://github.com/SeoYoungDeok) |[신현준](https://github.com/june95) |[조수혜](https://github.com/suhyehye) |
 
