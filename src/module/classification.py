@@ -6,10 +6,10 @@ from torch import nn
 from torch.optim import Optimizer
 from torch.optim.lr_scheduler import LRScheduler
 from torchmetrics import MeanMetric
-from torchmetrics.classification import MulticlassAccuracy
+from torchmetrics.classification import BinaryAccuracy
 
 
-class Model(LightningModule):
+class ClassificationModel(LightningModule):
     def __init__(
         self,
         model: nn.Module,
@@ -27,8 +27,8 @@ class Model(LightningModule):
         self.example_input_array = torch.zeros(1, 3, 400, 400)
         self.val_loss = MeanMetric()
         self.num_classes = num_classes
-        self.train_acc = MulticlassAccuracy(num_classes=self.num_classes, average=None)
-        self.val_acc = MulticlassAccuracy(num_classes=self.num_classes, average=None)
+        self.train_acc = BinaryAccuracy(threshold=0.5)
+        self.val_acc = BinaryAccuracy(threshold=0.5)
 
         if load_ckpt_path is not None:
             ckpt = torch.load(load_ckpt_path)
@@ -43,9 +43,8 @@ class Model(LightningModule):
     def training_step(self, batch: torch.Tensor, batch_idx: int) -> torch.Tensor:
         x, y = batch
         pred = self.forward(x)
-        loss = self.loss(pred, y)
-
-        self.train_acc.update(pred.argmax(dim=-1), y.argmax(-1))
+        loss = self.loss(pred.squeeze(), y)
+        self.train_acc.update(pred.squeeze(), y)
 
         self.log(
             name="train_loss",
@@ -63,10 +62,9 @@ class Model(LightningModule):
     def validation_step(self, batch: torch.Tensor, batch_idx: int) -> None:
         x, y = batch
         pred = self.forward(x)
-        loss = self.loss(pred, y)
+        loss = self.loss(pred.squeeze(), y)
         self.val_loss(loss)
-
-        self.val_acc.update(pred.argmax(dim=-1), y.argmax(-1))
+        self.val_acc.update(pred.squeeze(), y)
 
         self.log(
             name="val_loss",
@@ -80,82 +78,6 @@ class Model(LightningModule):
         print(f"val_acc : {self.val_acc.compute()}")
         self.val_acc.reset()
 
-    def configure_optimizers(self):
-        optimizer = self.optimizer(params=self.parameters())
-        scheduler = self.scheduler(
-            optimizer=optimizer,
-            total_steps=self.trainer.estimated_stepping_batches,
-        )
-
-        return {
-            "optimizer": optimizer,
-            "lr_scheduler": {
-                "scheduler": scheduler,
-                "interval": "step",
-                "frequency": 1,
-            },
-        }
-
-    def optimizer_zero_grad(
-        self, epoch: int, batch_idx: int, optimizer: Optimizer
-    ) -> None:
-        optimizer.zero_grad(set_to_none=True)
-
-
-class SegmentationModel(LightningModule):
-    def __init__(
-        self,
-        model: nn.Module,
-        optimizer: Optimizer,
-        loss: nn.Module,
-        scheduler: LRScheduler,
-    ):
-        super().__init__()
-        self.model = model
-        self.loss = loss
-        self.optimizer = optimizer
-        self.scheduler = scheduler
-        self.example_input_array = torch.zeros(1, 3, 32, 32)
-        
-    def dice_coef(self, y_true, y_pred):
-        y_true_f = y_true.flatten(2)
-        y_pred_f = y_pred.flatten(2)
-        intersection = torch.sum(y_true_f * y_pred_f, -1)
-        
-        eps = 0.0001
-        return (2. * intersection + eps) / (torch.sum(y_true_f, -1) + torch.sum(y_pred_f, -1) + eps)
-    
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.model(x)
-
-    def training_step(self, batch: torch.Tensor, batch_idx: int) -> torch.Tensor:
-        x, y = batch
-        pred = self.forward(x)
-        loss = self.loss(pred, y)
-        
-        self.log(
-            name="train_loss",
-            value=loss,
-            on_step=True,
-            on_epoch=False,
-            logger=True,
-        )
-        return loss
-
-    def validation_step(self, batch: torch.Tensor, batch_idx: int) -> None:
-        x, y = batch
-        pred = self.forward(x)
-        loss = self.dice_coef(pred, y)
-        '''
-        self.log(
-            name="val_loss",
-            value=loss,
-            on_step=True,
-            on_epoch=False,
-            logger=True,
-        )
-        '''
-        
     def configure_optimizers(self):
         optimizer = self.optimizer(params=self.parameters())
         scheduler = self.scheduler(

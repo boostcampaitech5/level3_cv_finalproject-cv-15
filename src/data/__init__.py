@@ -1,4 +1,4 @@
-from .datamodule import DataModule, CatSkinDataModule
-from .dataset import EyesDataSet, MNISTDataSet, CatSkinDataset
+from .datamodule import DataModule, CatSkinDataModule, DogSkinDataModule
+from .dataset import EyesDataSet, MNISTDataSet, CatSkinDataset, DogSkinDataset
 
-__all__ = ["DataModule", "MNISTDataSet", "EyesDataSet", "CatSkinDataset", "CatSkinDataModule"]
+__all__ = ["DataModule", "MNISTDataSet", "EyesDataSet", "CatSkinDataset", "CatSkinDataModule", "DogSkinDataModule", "DogSkinDataset"]

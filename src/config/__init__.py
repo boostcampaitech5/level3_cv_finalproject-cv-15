@@ -18,6 +18,7 @@ full_builds = make_custom_builds_fn(
 defaults = [
     "_self_",
     {"architecture": "timm_resnest50d"},
+    {"module": "classification"},
     {"optimizer": "adam"},
     {"loss": "bce_with_logits"},
     {"scheduler": "onecycle"},
@@ -37,6 +38,7 @@ defaults = [
 class Config:
     defaults: list[Any] = field(default_factory=lambda: defaults)
     architecture: Any = MISSING
+    module: Any = MISSING
     optimizer: Any = MISSING
     loss: Any = MISSING
     scheduler: Any = MISSING

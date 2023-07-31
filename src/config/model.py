@@ -19,6 +19,30 @@ ResNetConfig = full_builds(
 
 UnetHrnetConfig = full_builds(
     UnetPlusPlus,
+    encoder_name="tu-hrnet_w64",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=3,
+)
+
+UnetDensenetConfig = full_builds(
+    UnetPlusPlus,
+    encoder_name="tu-densenet201",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=3,
+)
+
+UnetHrnetDogConfig = full_builds(
+    UnetPlusPlus,
+    encoder_name="tu-hrnet_w64",
+    encoder_weights="imagenet",
+    in_channels=3,
+    classes=6,
+)
+
+UnetDensenetDogConfig = full_builds(
+    UnetPlusPlus,
     encoder_name="tu-densenet201",
     encoder_weights="imagenet",
     in_channels=3,
@@ -63,5 +87,20 @@ def _register_configs():
         group="architecture",
         name="unetplusplushrnet",
         node=UnetHrnetConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="unetplusplusdensenet",
+        node=UnetHrnetConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="unetplusplushrnet_dog",
+        node=UnetHrnetDogConfig,
+    )
+    cs.store(
+        group="architecture",
+        name="unetplusplusdensenet_dog",
+        node=UnetHrnetDogConfig,
     )
     
